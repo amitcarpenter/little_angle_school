@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>AR TechWorld || Admin Login</title>
+    <link rel="stylesheet" href="/vendors/feather/feather.css" />
+    <link
+      rel="stylesheet"
+      href="/vendors/ti-icons/css/themify-icons.css"
+    />
+    <link rel="stylesheet" href="/vendors/css/vendor.bundle.base.css" />
+    <link rel="stylesheet" href="/css/vertical-layout-light/style.css" />
+    <link rel="shortcut icon" href="/images/favicon.png" />
+  </head>
+
+  <body>
+    <div class="container-scroller">
+      <div class="container-fluid page-body-wrapper full-page-wrapper">
+        <div class="content-wrapper d-flex align-items-center auth px-0">
+          <div class="row w-100 mx-0">
+            <div class="col-lg-4 mx-auto">
+              <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+                <div class="brand-logo">
+                  <img src="../../images/logo.png" alt="logo" />
+                </div>
+                <h4>Hello! let's get started</h4>
+                <h6 class="font-weight-light">Sign in to continue.</h6>
+
+                <form
+                  id="loginForm"
+                  class="pt-3"
+                  method="post"
+                  onsubmit="event.preventDefault(); validateAndLogin();"
+                >
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      class="form-control form-control-lg"
+                      id="email"
+                      placeholder="Username"
+                      oninput="clearError('userNameError')"
+                    />
+                    <p id="userNameError" style="color: red"></p>
+                  </div>
+                  <div class="form-group">
+                    <input
+                      type="password"
+                      class="form-control form-control-lg"
+                      id="password"
+                      placeholder="Password"
+                      oninput="clearError('passwordError')"
+                      required
+                    />
+                    <p id="passwordError" style="color: red"></p>
+                  </div>
+                  <div id="setSuccessMsg" style="color: green"></div>
+                  <div id="login_error" style="color: red"></div>
+                  <div class="mt-3">
+                    <button
+                      type="submit"
+                      class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                    >
+                      SIGN IN
+                    </button>
+                  </div>
+                  <div
+                    class="my-2 d-flex justify-content-between align-items-center"
+                  ></div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Handle Login -->
+    <script>
+      async function validateAndLogin() {
+        try {
+          let email = document.getElementById("email").value;
+          let password = document.getElementById("password").value;
+          let error_message_login = document.getElementById("login_error");
+
+          document.getElementById("userNameError").innerHTML = "";
+          document.getElementById("passwordError").innerHTML = "";
+          error_message_login.innerHTML = "";
+
+          if (email === "") {
+            document.getElementById("userNameError").innerHTML =
+              "User name required";
+            return;
+          }
+
+          if (password === "") {
+            document.getElementById("passwordError").innerHTML =
+              "Password required";
+            return;
+          }
+
+          const response = await fetch("https://api.maninderrealestate.com/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+
+          if (!response.ok) {
+            error_message_login.innerHTML =
+              "User ID and password are incorrect";
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          if (data.status === true) {
+            document.getElementById(
+              "setSuccessMsg"
+            ).innerHTML = `Login Successful!`;
+
+            localStorage.setItem("accessToken", data.accessToken);
+            sessionStorage.setItem("accessToken", data.accessToken);
+
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+            window.location.href = "/";
+          } else {
+            document.getElementById(
+              "login_error"
+            ).innerHTML = `Login failed: ${data.message}`;
+          }
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    </script>
+
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+  </body>
+</html>

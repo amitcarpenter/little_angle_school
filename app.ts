@@ -15,6 +15,7 @@ const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET as string;
 
 app.use('/', express.static(path.join(__dirname, 'src/uploads')));
 app.use(express.static(path.join(__dirname, 'src/public')));
+app.use(express.static(path.join(__dirname, 'src/public')));
 app.use(express.static(path.join(__dirname, 'src/public/admin')));
 
 

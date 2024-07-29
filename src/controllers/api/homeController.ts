@@ -39,7 +39,7 @@ export const render_team_page = (req: Request, res: Response) => {
   return res.render("call-to-action.ejs");
 };
 
-export const render_call_to_action_page = (req: Request, res: Response) => {
+export const render_teacher_page = (req: Request, res: Response) => {
   return res.render("team.ejs");
 };
 

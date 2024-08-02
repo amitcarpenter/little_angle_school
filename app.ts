@@ -1,9 +1,9 @@
 import express, { Application, Request, Response } from "express";
 import mongodb_connection from "./src/config/db";
-import configureApp from "./src/config/routes"
+import configureApp from "./src/config/routes";
 import dotenv from "dotenv";
-import path from 'path';
-dotenv.config()
+import path from "path";
+dotenv.config();
 
 mongodb_connection();
 const app: Application = express();
@@ -12,16 +12,13 @@ const PORT = process.env.PORT as string;
 const APP_URL = process.env.APP_URL as string;
 const EXPRESS_SESSION_SECRET = process.env.EXPRESS_SESSION_SECRET as string;
 
+app.use("/", express.static(path.join(__dirname, "src/uploads")));
+app.use(express.static(path.join(__dirname, "src/public")));
+app.use(express.static(path.join(__dirname, "src/public")));
+app.use(express.static(path.join(__dirname, "src/public/admin")));
 
-app.use('/', express.static(path.join(__dirname, 'src/uploads')));
-app.use(express.static(path.join(__dirname, 'src/public')));
-app.use(express.static(path.join(__dirname, 'src/public')));
-app.use(express.static(path.join(__dirname, 'src/public/admin')));
-
-
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/views'));
-
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "src/views"));
 
 configureApp(app);
 
@@ -29,7 +26,6 @@ configureApp(app);
 //   res.send("")
 // });
 
-
 app.listen(PORT, (): void => {
-  console.log(`Server is working on ${APP_URL}`);
+  console.log(`Server is working on http://localhost:${PORT}`);
 });

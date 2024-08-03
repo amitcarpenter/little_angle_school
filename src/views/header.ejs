@@ -62,19 +62,19 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav mx-auto">
-                    <a href="/" class="nav-item nav-link active">Home</a>
-                    <a href="/about" class="nav-item nav-link">About Us</a>
-                    <a href="/facilities" class="nav-item nav-link">Facilities</a>
-                    <a href="/teachers" class="nav-item nav-link">Teachers</a>
-                    <a href="/contact" class="nav-item nav-link">Contact Us</a>
+                    <a href="/" class="nav-item nav-link" id="nav-home">Home</a>
+                    <a href="/about" class="nav-item nav-link" id="nav-about">About Us</a>
+                    <a href="/facilities" class="nav-item nav-link" id="nav-facilities">Facilities</a>
+                    <a href="/teachers" class="nav-item nav-link" id="nav-teachers">Teachers</a>
+                    <a href="/contact" class="nav-item nav-link" id="nav-contact">Contact Us</a>
                 </div>
                 <a href="/enquiry" class="btn btn-primary rounded-pill px-3 d-none d-lg-block">Enquiry Now<i
                         class="fa fa-arrow-right ms-3"></i></a>
             </div>
+
         </nav>
         <!-- Navbar End -->
         <script>
-            // Function to fetch logo URL from API and update the img src
             async function loadLogo() {
                 try {
                     const response = await fetch('http://localhost:4002/api/get-logo');
@@ -86,11 +86,28 @@
                     console.error('Error fetching logo URL:', error);
                 }
             }
-
-            // Call the function to load the logo after the DOM content is loaded
             document.addEventListener('DOMContentLoaded', () => {
                 loadLogo();
                 console.log("api call for the logo")
             });
+
+
+            
+            document.addEventListener('DOMContentLoaded', () => {
+                const currentPath = window.location.pathname;
+
+                const navLinks = {
+                    '/': 'nav-home',
+                    '/about': 'nav-about',
+                    '/facilities': 'nav-facilities',
+                    '/teachers': 'nav-teachers',
+                    '/contact': 'nav-contact',
+                };
+
+                if (navLinks[currentPath]) {
+                    document.getElementById(navLinks[currentPath]).classList.add('active');
+                }
+            });
+
 
         </script>

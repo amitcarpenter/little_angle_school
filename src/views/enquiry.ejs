@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-
   <style>
     html,
     body {
@@ -171,24 +170,8 @@
     <div class="left-part">
       <i class="fas fa-graduation-cap"></i>
       <h1>Welcome to Little Angels Public High Secondary School Pachore</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique, illum mollitia? Maiores est enim veniam?
-        Blanditiis iure repellendus ducimus quas, dignissimos atque id facilis qui debitis aut odit, numquam deserunt.
-      </p>
-      </br>
-      <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse cupiditate voluptatum eaque, dolorem inventore
-        architecto nostrum. Inventore id recusandae, quos, nulla autem accusamus tenetur tempore blanditiis veniam
-        aperiam harum quae!
-      </p>
-      <!-- <div class="btn-group">
-          <a class="btn-item" href="https://www.w3docs.com/learn-html.html"
-            >Learn HTML</a
-          >
-          <a class="btn-item" href="https://www.w3docs.com/quiz/#"
-            >Select Quiz</a
-          >
-        </div> -->
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit...</p>
+      <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit...</p>
     </div>
 
     <form id="enquiryForm" method="POST">
@@ -197,41 +180,28 @@
         <h2>Admission Enquiry 24-25</h2>
       </div>
       <div class="info">
-        <select name="academicYear" required>
+        <select id="academicYear" name="academicYear" required>
           <option value="" selected>Select Year</option>
           <option value="2024-2025">2024-2025</option>
           <option value="2025-2026">2025-2026</option>
         </select>
-        <select name="selectedClass" required>
+        <select id="selectedClass" name="selectedClass" required>
           <option value="" selected>Select Class</option>
           <option value="1st">Class 1st</option>
           <option value="2nd">Class 2nd</option>
-          <option value="3rd">Class 3rd</option>
-          <option value="4th">Class 4th</option>
-          <option value="5th">Class 5th</option>
-          <option value="6th">Class 6th</option>
-          <option value="7th">Class 7th</option>
-          <option value="8th">Class 8th</option>
-          <option value="9th">Class 9th</option>
-          <option value="10th">Class 10th</option>
-          <option value="11th">Class 11th</option>
-          <option value="12th">Class 12th</option>
+          <!-- Add more classes as needed -->
         </select>
-
-        <select name="medium" required>
+        <select id="medium" name="medium" required>
           <option value="" selected>Medium</option>
           <option value="English">English</option>
           <option value="Hindi">Hindi</option>
         </select>
-        <input class="fname" type="text" name="parentName" placeholder="* Parent Name" required />
-        <input class="fname" type="text" name="studentName" placeholder="Student Name" />
-        <input type="email" name="parentEmail" placeholder="* Parent Email Id" required />
-        <input type="text" name="mobileNumber" placeholder="Mobile Number" />
+        <input id="parentName" type="text" name="parentName" placeholder="* Parent Name" required />
+        <input id="studentName" type="text" name="studentName" placeholder="Student Name" />
+        <input id="parentEmail" type="email" name="parentEmail" placeholder="* Parent Email Id" required />
+        <input id="mobileNumber" type="number" name="mobileNumber" placeholder="Mobile Number" />
       </div>
-      <div class="checkbox">
-        <input type="checkbox" name="privacyPolicyAgreed" required />
-        <span>I agree to the <a href="https://www.google.com/">Privacy Policy for M.P Public School</a></span>
-      </div>
+
       <button type="submit">Enquiry Now</button>
     </form>
   </div>
@@ -241,17 +211,29 @@
       $("#enquiryForm").submit(function (e) {
         e.preventDefault();
 
-        var formData = $(this).serialize();
-        console.log(formData); // Corrected typo
+        // Construct form data
+        var formData = {
+          academicYear: $('#academicYear').val(),
+          selectedClass: $('#selectedClass').val(),
+          medium: $('#medium').val(),
+          parentName: $('#parentName').val(),
+          studentName: $('#studentName').val(),
+          parentEmail: $('#parentEmail').val(),
+          mobileNumber: $('#mobileNumber').val()
+        };
 
         $.ajax({
-          url: 'http://localhost:4002/api/enquiries', // Adjust the API endpoint if necessary
+          url: 'http://localhost:4002/api/enquiries', 
           type: 'POST',
-          data: formData,
+          contentType: 'application/json', 
+          data: JSON.stringify(formData), 
           success: function (response) {
-            alert('Enquiry submitted successfully!');
-            // Optionally, redirect or clear the form here
-            window.location.href = '/'; // Redirect to a success page or clear the form
+            if (response.success) {
+              alert('Enquiry submitted successfully!');
+              window.location.href = '/'; // Redirect after success
+            } else {
+              alert('Failed to submit enquiry: ' + response.message);
+            }
           },
           error: function (xhr, status, error) {
             console.error("Error submitting enquiry:", error);
@@ -261,6 +243,7 @@
       });
     });
   </script>
+
 </body>
 
 </html>

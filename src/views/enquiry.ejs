@@ -223,10 +223,10 @@
         };
 
         $.ajax({
-          url: 'http://localhost:4002/api/enquiries', 
+          url: 'https://api.littleangelspachore.com/api/enquiries',
           type: 'POST',
-          contentType: 'application/json', 
-          data: JSON.stringify(formData), 
+          contentType: 'application/json',
+          data: JSON.stringify(formData),
           success: function (response) {
             if (response.success) {
               alert('Enquiry submitted successfully!');

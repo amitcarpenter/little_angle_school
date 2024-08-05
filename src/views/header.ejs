@@ -77,8 +77,10 @@
         <script>
             async function loadLogo() {
                 try {
-                    const response = await fetch('http://localhost:4002/api/get-logo');
+                    const response = await fetch('https://api.littleangelspachore.com/api/get-logo');
                     const data = await response.json();
+                    console.log(data)
+                    console.log("asdfa")
                     const logoElement = document.getElementById('logo');
                     logoElement.src = data.data.logo_image;
                     logoElement.alt = 'Company Logo';
@@ -92,7 +94,7 @@
             });
 
 
-            
+
             document.addEventListener('DOMContentLoaded', () => {
                 const currentPath = window.location.pathname;
 

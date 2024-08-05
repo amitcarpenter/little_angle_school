@@ -56,25 +56,25 @@
 
 
   <!-- Facilities  -->
- 
-<script>
-  $(document).ready(function() {
+
+  <script>
+    $(document).ready(function () {
       $.ajax({
-          url: 'http://localhost:4002/api/facilities/all',
-          method: 'GET',
-          success: function(response) {
-              const facilitiesContainer = $('#facilities-container');
-              facilitiesContainer.empty(); // Clear existing content
+        url: 'https://api.littleangelspachore.com/api/facilities/all',
+        method: 'GET',
+        success: function (response) {
+          const facilitiesContainer = $('#facilities-container');
+          facilitiesContainer.empty(); // Clear existing content
 
-              // Define an array of colors
-              const colors = ['primary', 'success', 'warning', 'info'];
-              
-              response.data.forEach((facility, index) => {
-                  // Select a color based on the index or some logic
-                  const colorClass = `bg-${colors[index % colors.length]}`;
-                  const textColorClass = `text-${colors[index % colors.length]}`;
+          // Define an array of colors
+          const colors = ['primary', 'success', 'warning', 'info'];
 
-                  const facilityHtml = `
+          response.data.forEach((facility, index) => {
+            // Select a color based on the index or some logic
+            const colorClass = `bg-${colors[index % colors.length]}`;
+            const textColorClass = `text-${colors[index % colors.length]}`;
+
+            const facilityHtml = `
                       <div class="col-lg-4 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                           <div class="facility-item">
                               <div class="facility-icon ${colorClass}">
@@ -89,15 +89,15 @@
                           </div>
                       </div>
                   `;
-                  facilitiesContainer.append(facilityHtml);
-              });
-          },
-          error: function(error) {
-              console.error('Error fetching facilities:', error);
-          }
+            facilitiesContainer.append(facilityHtml);
+          });
+        },
+        error: function (error) {
+          console.error('Error fetching facilities:', error);
+        }
       });
-  });
-</script>
+    });
+  </script>
 
 
   <%- include('footer.ejs') %>

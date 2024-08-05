@@ -19,21 +19,23 @@
 
 
 
-    <!-- Popular Teachers Start -->
-    <div class="container-xxl py-5">
-      <div class="container">
-          <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-              <h1 class="mb-3">Popular Teachers</h1>
-              <p>Popular Teachers: Educators who are highly regarded by students and parents alike, known for their engaging teaching methods, supportive nature, and ability to inspire and connect with students, making learning enjoyable and impactful.</p>
-          </div>
-          <div class="row g-4" id="teachers-container">
-              <!-- Teachers will be inserted here dynamically -->
-          </div>
+  <!-- Popular Teachers Start -->
+  <div class="container-xxl py-5">
+    <div class="container">
+      <div class="text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+        <h1 class="mb-3">Popular Teachers</h1>
+        <p>Popular Teachers: Educators who are highly regarded by students and parents alike, known for their engaging
+          teaching methods, supportive nature, and ability to inspire and connect with students, making learning
+          enjoyable and impactful.</p>
       </div>
+      <div class="row g-4" id="teachers-container">
+        <!-- Teachers will be inserted here dynamically -->
+      </div>
+    </div>
   </div>
   <!-- Popular Teachers End -->
 
-   
+
 
 
 
@@ -42,7 +44,7 @@
   <script>
     $(document).ready(function () {
       $.ajax({
-        url: 'http://localhost:4002/api/teachers/all',
+        url: 'https://api.littleangelspachore.com/api/teachers/all',
         method: 'GET',
         success: function (response) {
           const teachersContainer = $('#teachers-container');

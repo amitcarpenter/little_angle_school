@@ -333,7 +333,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:4002/api/facilities/all',
+                url: 'https://api.littleangelspachore.com/api/facilities/all',
                 method: 'GET',
                 success: function (response) {
                     const facilitiesContainer = $('#facilities-container');
@@ -376,7 +376,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:4002/api/about/get',
+                url: 'https://api.littleangelspachore.com/api/about/get',
                 method: 'GET',
                 success: function (response) {
                     const aboutData = response.data;
@@ -423,7 +423,7 @@
     <script>
         $(document).ready(function () {
             $.ajax({
-                url: 'http://localhost:4002/api/teachers/all',
+                url: 'https://api.littleangelspachore.com/api/teachers/all',
                 method: 'GET',
                 success: function (response) {
                     const teachersContainer = $('#teachers-container');

@@ -19,6 +19,10 @@ export const render_about_page = (req: Request, res: Response) => {
   return res.render("about.ejs");
 };
 
+export const render_events_page = (req: Request, res: Response) => {
+  return res.render("events.ejs");
+};
+
 export const render_contact_page = (req: Request, res: Response) => {
   return res.render("contact.ejs");
 };
